@@ -1,12 +1,10 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 from flask_bcrypt import Bcrypt
 from database import connect_to_database
+from util import hash_password, tokenize_email
 
 app = Flask(__name__)
 app.secret_key = 'Aerol'
-bcrypt = Bcrypt(app)
-
-users = {}  # Temporary storage (replace with database later)
 
 @app.route('/')
 def home():
@@ -20,10 +18,20 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        user = users.get(username)
-        if user and bcrypt.check_password_hash(user['password'], password):
+        hashed_pw = hash_password(password)
+
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
+        user = cursor.fetchone()
+
+        cursor.close()
+        conn.close()
+
+        if user and user['password'] == hashed_pw:
             session['username'] = username
-            return redirect(url_for('home'))
+            return render_template('index.html', username=username)
         msg = 'Invalid email or password!'
     return render_template('login.html', msg=msg)
 
@@ -34,14 +42,28 @@ def register():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        dob = request.form['dob']
 
-        if username in users:
+        tokenized_email = tokenize_email(email)
+        hashed_pw = hash_password(password)
+
+        conn = connect_to_database()
+        cursor = conn.cursor(dictionary=True)
+
+        cursor.execute('SELECT * FROM users WHERE username = %s', (username,))
+        user = cursor.fetchone()
+
+        if user:
             msg = 'Username already taken!'
         else:
-            hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
-            users[username] = {'password': hashed_pw, 'email': email, 'dob': dob}
+            cursor.execute(
+                'INSERT INTO users (username, email, password) VALUES (%s, %s, %s)',
+                (username, tokenized_email, hashed_pw)
+            )
+            conn.commit()
             msg = 'Registered successfully!'
+
+        cursor.close()
+        conn.close()
     return render_template('register.html', msg=msg)
 
 @app.route('/logout')
