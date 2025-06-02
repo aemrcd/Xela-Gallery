@@ -86,18 +86,21 @@
 <body>
   <div class="form-container">
     <h1>Login</h1>
-    {% if msg %}
-      <p class="message">{{ msg }}</p>
-    {% endif %}
+   
 
-    <form method="POST">
+    <form method="POST" action="{{ url_for('login') }}">
+      
       <label for="email">EMAIL</label>
-      <input type="email" id="email" name="email" placeholder="hello@reallygreatsite.com" required />
+      <input type="email" id="email" name="email" placeholder="username@email.com" required />
 
       <label for="password">PASSWORD</label>
       <input type="password" id="password" name="password" placeholder="******" required />
 
       <button type="submit">Log In</button>
+      {% if msg %}
+      <p class="message">{{ msg }}</p>
+      {% endif %}
+
     </form>
 
     <div class="not-registered">
