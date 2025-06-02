@@ -11,7 +11,7 @@ def connect_to_database():
             user="root",
             password="",
             port=3306,
-            database="xxelaDB"
+            database="xella-user"
 
             # host=os.getenv("DBHOST"),
             # user=os.getenv("DBUSER"),
