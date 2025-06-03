@@ -1,111 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Login</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: white;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      line-height: 1.6;
-    }
+{% extends "navbar.html" %}
 
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+{% block title %}Login{% endblock %}
 
-    .form-container {
-      width: 100%;
-      max-width: 400px;
-      padding: 2rem;
-      box-sizing: border-box;
-    }
+{% block content %}
 
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: bold;
-    }
 
-    input[type="email"], input[type="password"] {
-      width: 90%;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-    }
+<div class="form-container">
 
-    button {
-      width: 50%;
-      translate: 50%;
-      padding: 1rem;
-      background-color: black;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
+<h1 class="title">Login</h1>
 
-    button:hover {
-      background-color: #333;
-    }
 
-    .message {
-      text-align: center;
-      color: red;
-      margin-top: 1rem;
-    }
+<form action="{{ url_for('login') }}" method="POST">
 
-    .not-registered {
-      text-align: center;
-      margin-top: 1rem;
-    }
+  <label for="email">EMAIL</label>
+  <input type="email" id="email" name="email" placeholder="username@email.com" required>
 
-    .not-registered a {
-      color: #007bff;
-      text-decoration: none;
-    }
+  <label for="password">PASSWORD</label>
+  <input type="password" id="password" name="password" placeholder="******" required>
 
-    .not-registered a:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-  <div class="form-container">
-    <h1>Login</h1>
-   
+  <button class="signupbtn" type="submit">Log In</button>
 
-    <form method="POST" action="{{ url_for('login') }}">
-      
-      <label for="email">EMAIL</label>
-      <input type="email" id="email" name="email" placeholder="username@email.com" required />
+  {% if msg %}
+  <p class="message">{{ msg }}</p>
+  {% endif %}
 
-      <label for="password">PASSWORD</label>
-      <input type="password" id="password" name="password" placeholder="******" required />
+</form> 
+<div class="not-registered">
 
-      <button type="submit">Log In</button>
-      {% if msg %}
-      <p class="message">{{ msg }}</p>
-      {% endif %}
-
-    </form>
-
-    <div class="not-registered">
-      Not Registered? <a href="{{ url_for('register') }}">Create an account</a>
-    </div>
-  </div>
-</body>
-</html>
+Not Registered? <a href="{{ url_for('register') }}">Create an account</a>
+</div>
+</div>
+{% endblock %}

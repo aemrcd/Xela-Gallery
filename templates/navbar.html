@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}My Watch Store{% endblock %}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+   <link rel="icon" href="/static/IMAGES/logo.png" type="image/png">
+   <link href="https://fonts.googleapis.com/css2?family=Finlandica:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+  <header>
+    <div class="logo">
+      <img src="/static/IMAGES/logo.png" style="width: 50px; height: 50px; border-radius: 50%;">
+    </div>
+    <nav>
+      <ul>
+
+         {% if session.email %}
+        <li><a href="/">Home</a></li>
+        <li><a href="#">3d Models</a></li>
+        <li><a href="/logout">Logout</a></li>
+        {% else %}
+            <li><a href="/login">Login/Signup</a></li>
+        {% endif %}
+
+      </ul>
+    </nav>
+  </header>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

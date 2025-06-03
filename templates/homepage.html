@@ -1,0 +1,60 @@
+
+<body>
+
+{% extends "navbar.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="main">
+
+
+  <div class="left-column">
+    <h1>Welcome, {{ username }}!</h1>
+    <p >Explore 3D Art collection.</p>
+
+
+    <div class="model-details">
+      <h2>Apple Watch</h2>
+      <p>Information: A 3d Model of Apple Watch. This model features realistic textures and precise details. Ideal for showcasing wearable tech in AR environments.</p>
+    <div class="details">
+        <p>
+            by <a href="https://sketchfab.com/Polyman_3D" target="_blank" rel="noopener">Polyman Studio is licensed under</a> <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>
+        </p>
+    </div>
+    </div>
+
+    
+  </div>
+
+  <div class="right-column">
+    <div class="model-container">
+      <model-viewer
+        src="/static/models/testwatch-v1.glb"
+        alt="A 3D watch model"
+        auto-rotate
+        camera-controls
+        ar
+        environment-image="neutral"
+        lazy="loading"
+        exposure="1">
+      </model-viewer>
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="pagination">
+  <a href="/model1"><button>1</button></a>
+  <a href="/model2"><button>2</button></a>
+  <a href="/model3"><button>3</button></a>
+  <a href="/model4"><button>4</button></a>
+  <a href="/model5"><button>5</button></a>
+</div>
+
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.1.0/dist/model-viewer.min.js"></script>
+{% endblock %}
+
+</body>
