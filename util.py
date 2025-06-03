@@ -1,11 +1,12 @@
 import hashlib
-import secrets
+import hmac
+import os
+from dotenv import load_dotenv
 
-def hash_password(password):
-    return hashlib.sha256(password.encode()).hexdigest()
+load_dotenv()
+secret = os.getenv("SECRET_SALT")  
 
-def tokenize_email(email):
-    user_id = secrets.randbelow(1000000)
-    domain = email.split('@')[-1]
-    email_token = f"User_{user_id}@{domain}"
-    return email_token
+def hash_email(email: str) -> str:
+    
+    return hmac.new(secret, email.lower().strip().encode(), hashlib.sha256).hexdigest()  #  .lower.strip to prevent issue 
+    # with Large letters and spaces in email address
