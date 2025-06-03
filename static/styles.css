@@ -1,0 +1,242 @@
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Finlandica", sans-serif;
+  background-color: #333333;
+  color: #f1f1f1;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background-color: rgb(30, 30, 30);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #f1f1f1;
+  font-size: 16px;
+}
+
+/* Main Content */
+.main {
+  display: flex;
+  gap: 20px;
+  padding: 40px;
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.05);
+  margin: 20px;
+}
+
+.left-column {
+  width: 50%;
+}
+
+.right-column {
+  width: 50%;
+}
+
+.left-column h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.left-column p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+/* Model Viewer */
+.model-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  background-color: transparent;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100%;
+}
+
+.model-details {
+  margin-top: 30px;
+  margin-left: -15px;
+  padding: 15px;
+  background: rgba(30, 30, 30, 0.9);
+  border-radius: 8px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.model-details h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.pagination a {
+  text-decoration: none;
+}
+
+.pagination button {
+  border: none;
+  padding: 8px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #f1f1f1;
+}
+
+.pagination button.active {
+  background-color: #dc3545;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination button.active:hover {
+  background-color: #dc3545;
+}
+
+/* Log-in & Register */
+.title {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  margin: 0 auto;
+  margin-top: 5%;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.signupbtn {
+  width: 40%;
+  translate: 75%;
+  padding: 1rem;
+  background-color: #dc3545;
+  color: #f7f7f7;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.not-registered,
+.already-registered {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.not-registered a,
+.already-registered a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.not-registered a:hover,
+.already-registered a:hover {
+  text-decoration: underline;
+}
+
+/* Flash Messages */
+.flash-messages {
+  position: relative;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.alert {
+  padding: 15px 25px;
+  border-radius: 5px;
+  color: white;
+  min-width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(100%);
+  opacity: 0;
+  animation:
+    slideIn 0.5s ease-out forwards,
+    fadeOut 0.5s ease-in forwards 2s;
+}
+
+.alert-success {
+  background-color: #28a745;
+}
+
+.alert-error {
+  background-color: #dc3545;
+}
+
+.alert-info {
+  background-color: #17a2b8;
+}
+
+/* Flash Message Animations */
+@keyframes slideIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
