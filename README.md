@@ -13,8 +13,8 @@ Explore 3D Art, Engage Your Imagination Today!
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-  - [Database-Setup](README.md#database-setup)
-  - [Website-View](#testing)
+  - [Database-Setup](#database-setup)
+  - [Website-View](#website-view)
 
 ---
 
