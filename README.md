@@ -3,8 +3,9 @@
 Explore 3D Art, Engage Your Imagination Today!
 
 [![Last Commit](https://img.shields.io/github/last-commit/aemrcd/Xela-Gallery)](https://github.com/aemrcd/Xela-Gallery/commits/main) 
-[![HTML Percentage](https://img.shields.io/badge/html-60.6%25-blue)](https://github.com/aemrcd/Xela-Gallery) 
-[![Python Percentage](https://img.shields.io/badge/python-39.4%25-yellow)](https://github.com/aemrcd/Xela-Gallery) 
+[![HTML Percentage](https://img.shields.io/badge/Html-60.6%25-orange)](https://github.com/aemrcd/Xela-Gallery) 
+[![Python Percentage](https://img.shields.io/badge/Python-21.4%25-blue)](https://github.com/aemrcd/Xela-Gallery) 
+[![CSS](https://img.shields.io/badge/CSS-18.0%25-purple)](https://github.com/aemrcd/Xela-Gallery) 
 
 
 ## Table of Contents
