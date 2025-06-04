@@ -29,3 +29,4 @@ jobs:
           app-name: ${{ secrets.AZURE_APP_NAME }}  
           publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }} 
           package: .
+          startup-command: 'gunicorn --bind 0.0.0.0:8000 app:app'
