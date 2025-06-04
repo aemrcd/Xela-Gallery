@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash
-from flask_bcrypt import Bcrypt
+from werkzeug.security import generate_password_hash, check_password_hash
 from database import connect_to_database
 import os
 from dotenv import load_dotenv
@@ -8,14 +8,13 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
-bcrypt = Bcrypt(app)
 
 @app.route('/')
 def home():
     if 'email' in session:
         return render_template('homepage.html', 
-                           email=session.get('email'), 
-                           username=session.get('username'))
+                               email=session.get('email'), 
+                               username=session.get('username'))
     return redirect(url_for('login'))
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -25,7 +24,8 @@ def register():
         email = request.form['email']
         password = request.form['password']
 
-        hashed_pw = bcrypt.generate_password_hash(password).decode('utf-8')
+        # Hash the password using Werkzeug
+        hashed_pw = generate_password_hash(password)
 
         conn = connect_to_database()
         cursor = conn.cursor(dictionary=True)
@@ -62,7 +62,8 @@ def login():
         conn.close()
 
         if user is not None:
-            if bcrypt.check_password_hash(user['password'], password):
+            # Verify password hash using Werkzeug
+            if check_password_hash(user['password'], password):
                 session['email'] = user['email']
                 session['username'] = user['username']
                 flash('Logged in successfully!', 'success')
