@@ -83,66 +83,83 @@ Before you begin, ensure you have the following installed:
 ---
 ### Database Setup
 
-1. Installing MariaDB to PI/Virtual Machine
+### 1. Install MariaDB
 
-  - *Make sure you install Ubuntu on your `PI` & `Virtual Machine`*
+Ensure you're running Ubuntu on your Raspberry Pi or VM. Then:
 
-  - Press `Windows Key` to open the "Search" menu.
-     - Type `Terminal` and press **Enter**. This will open the Terminal Prompt.
-     - install MariaDB by typing: 
-      ```bash 
-      sudo apt install mariadb-server
-      ```
-      ```bash
-      sudo mariadb_secure_installation
-      ```
-2. Creating and Managing Databases
-   
-   - Log in to MariaDB as root:
-     
-     ```bash
-     sudo mysql -u root -p
-     ```
-     
-   - Create a new database:
-     ```bash
-      CREATE DATABASE my_database;
-     ```
-     
- 4. Create a new user and grant privileges:
-  ```bash
-  CREATE USER 'my_user'@'localhost' IDENTIFIED BY 'password';
-  GRANT ALL PRIVILEGES ON my_database.* TO 'my_user'@'localhost';
-  FLUSH PRIVILEGES;
-  ```
- 4. Exit MariaDB:
-  ```bash
-  EXIT;
-  ```
-### 3. Managing Tables in MariaDB:
-
-1. Showing The Database:
-- This statement works to show all of your database.
 ```bash
+sudo apt update
+sudo apt install mariadb-server
+sudo mariadb-secure-installation
+```
+
+---
+
+### 2. Create Database and User
+
+Log into MariaDB:
+
+```bash
+sudo mysql -u root -p
+```
+
+Then execute the following SQL commands:
+
+```sql
+CREATE DATABASE my_database;
+
+CREATE USER 'my_user'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON my_database.* TO 'my_user'@'localhost';
+
+FLUSH PRIVILEGES;
+
+EXIT;
+```
+
+---
+
+## Managing Tables
+
+### 1. Show All Databases
+
+```sql
 SHOW DATABASES;
 ```
-2. SELECTING The Database:
-- This statement works if you have multiple database.
-```bash
-USE "yourdatabase";
+
+### 2. Select a Database
+
+```sql
+USE my_database;
 ```
-3. Viewing tables in your database
-- To see the data inside a table, use the `SELECT` query. Replace `"yourtable"` with the name of the your table  to view.
 
-```bash
-SELECT * FROM "yourdatabase";
+### 3. View Table Contents
+
+```sql
+SELECT * FROM users;
 ```
-4. Deleting a Row from a Table
 
-- If you want to delete a specific row in a table, use the   `DELETE` statement with a `WHERE` and  Replace `"yourtable"` with the your table name and `"PLACE_YOUR_ID"` with the ID or condition to delete a spesific row.
+### 4. Delete a Row From a Table
 
-```bash
-SELECT * FROM  "yourdatabase" WHERE Id IN = "PLACE_YOUR_ID";
+To delete a row by its ID:
+
+```sql
+DELETE FROM users WHERE id = 1;
+```
+
+> 🔍 **Note:** Be sure to replace `users` with your table name and `1` with the actual ID you want to delete.
+
+---
+
+### 5. Example: Creating the `users` Table
+
+```sql
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(150) UNIQUE NOT NULL,
+    email VARCHAR(150) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
 ```
 ---
 ### Website View
