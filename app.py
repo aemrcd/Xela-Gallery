@@ -24,7 +24,7 @@ def register():
         email = request.form['email']
         password = request.form['password']
 
-        # Hash the password using Werkzeug
+
         hashed_pw = generate_password_hash(password)
 
         conn = connect_to_database()
@@ -62,7 +62,7 @@ def login():
         conn.close()
 
         if user is not None:
-            # Verify password hash using Werkzeug
+            
             if check_password_hash(user['password'], password):
                 session['email'] = user['email']
                 session['username'] = user['username']
